@@ -1,6 +1,7 @@
 // Clase para instanciar un producto a manipular
 class Producto{
-   constructor(producto, categoria, modelo, talla, marca, cantidad, precio){
+   constructor(id, producto, categoria, modelo, talla, marca, cantidad, precio){
+      this.id = id;
       this.producto = producto;
       this.categoria = categoria;
       this.modelo = modelo
@@ -14,6 +15,20 @@ class Producto{
    // Metodo o funcion para obtener el precio total del producto en inventario
    obtenerTotal(){
       this.total = this.cantidad * this.precio
+   }
+
+   // Metodo estatico para instanciar un objeto
+   static instanciarObjeto(objeto){
+      return new Producto(
+         objeto.id,
+         objeto.producto,
+         objeto.categoria,
+         objeto.modelo,
+         objeto.talla,
+         objeto.marca,
+         objeto.cantidad,
+         objeto.precio
+      );
    }
 
    // Metodo o funcion para editar un producto en inventario
