@@ -21,6 +21,38 @@ const categoria = document.getElementById('categoria')
 
 categoria.addEventListener("change", showTallaInput)
 
+const inputBusqueda = document.getElementById('input-busqueda');
+inputBusqueda.addEventListener("input", function (event) {
+  event.preventDefault();
+  const valorBusqueda = inputBusqueda.value.toLowerCase();
+  //console.log(valorBusqueda)
+  filtrarElementos(valorBusqueda);
+});
+
+// Función para filtrar la búsqueda que haga el usuario
+function filtrarElementos(valorBusqueda) {
+  const elementos = document.querySelectorAll('.articulos.filtro-busqueda');
+  // Se itera sobre el nombre, categoria, modelo, talla y marca del producto para solo mostrar los que coincidan con lo que haya tipeado el usuario
+  elementos.forEach(elemento => {
+    const textoProducto = elemento.querySelector('.nombre-producto').textContent.toLowerCase();
+    const textoCategoria = elemento.querySelector('.categoria-producto').textContent.toLowerCase();
+    const textoModelo = elemento.querySelector('.modelo-producto').textContent.toLowerCase();
+    const textoTalla = elemento.querySelector('.talla-producto').textContent.toLowerCase();
+    const textoMarca = elemento.querySelector('.marca-producto').textContent.toLowerCase();
+
+    if (textoProducto.includes(valorBusqueda) ||
+      textoCategoria.includes(valorBusqueda) ||
+      textoModelo.includes(valorBusqueda) ||
+      textoTalla.includes(valorBusqueda) ||
+      textoMarca.includes(valorBusqueda)) {
+      elemento.style.display = '';
+    } else {
+      elemento.style.display = 'none';
+    }
+  });
+}
+
+
 function showTallaInput() {
   let categoria = document.getElementById("categoria").value;
   let tallaContainer = document.getElementById("tallaContainer");

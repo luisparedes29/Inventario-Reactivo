@@ -173,13 +173,13 @@ const template=(productos)=>{
    productos.obtenerTotal()
    
    return `
-   <tr>
-   <td>${productos.producto}</td>
-   <td>${productos.categoria}</td>
-   <td>${productos.modelo}</td>
-   <td>${productos.talla}</td>
-   <td>${productos.marca}</td>
-   <td>${productos.cantidad}</td>
+   <tr class="articulos filtro-busqueda">
+   <td class="nombre-producto">${productos.producto}</td>
+   <td class="categoria-producto">${productos.categoria}</td>
+   <td class="modelo-producto">${productos.modelo}</td>
+   <td class="talla-producto">${productos.talla}</td>
+   <td class="marca-producto">${productos.marca}</td>
+   <td >${productos.cantidad}</td>
    <td>${productos.precio}</td>
    <td>${productos.total}</td>
    <td></td>
