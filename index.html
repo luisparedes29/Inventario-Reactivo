@@ -12,28 +12,30 @@
 
 </head>
 
-<body>
-    <header>
+<body class="d-flex flex-column align-items-center ">
+    <header class="w-100 ">
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img src="/assets/logo_ASAL.png" alt="Logo" width="100" height="50"
                         class="d-inline-block align-text-center">
-                    El sistema de inventario ASAL es una herramienta eficiente para gestionar y controlar el stock de
-                    productos de una empresa
                 </a>
+                <p class="bg-dark text-light text-center p-2 m-2 rounded-3">El sistema de inventario ASAL es una
+                    herramienta eficiente para gestionar y controlar el stock de productos de una empresa</p>
             </div>
         </nav>
     </header>
 
-    <section>
+
+    <section class="text-center mt-4 bg-body-secondary p-3 rounded-3">
         <h1>Inventario de Mercancías</h1>
     </section>
 
-    <section>
-        <div class="navbar bg-body-tertiary">
+
+    <section class="d-flex flex-row ">
+        <div class="navbar bg-body-tertiary w-100 m-4 rounded-3">
             <div class="container-fluid">
-                <a class="navbar-brand">Productos <i class="fa-sharp fa-solid fa-circle-chevron-down"></i></a>
+                <p>Productos <i class="fa-sharp fa-solid fa-circle-chevron-down"></i></p>
                 <p class="d-inline-block align-text-center">Barra de Búsqueda</p>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Buscar producto" aria-label="Search">
@@ -43,123 +45,125 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+
+        <button type="button" class="btn btn-primary m-4 rounded-3 w-25" data-bs-toggle="modal"
+            data-bs-target="#myModal">
             Registrar producto
         </button>
         <div class="modal" id="myModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Registro de nuevo producto</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
+            <form id="registrarProductos">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Registro de nuevo producto</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
 
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <div class="mb-3 mt-3">
-                            <form>
-                                <label for="nombre" class="form-label">Nombre del producto</label>
-                                <input type="text" class="form-control" id="nombre"
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="mb-3 mt-3">
+                                <label for="producto" class="form-label">Nombre del producto</label>
+                                <input type="text" class="form-control" id="producto"
                                     placeholder="Introduce nombre del producto" name="nombre" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="modelo" class="form-label">Color o Modelo:</label>
-                            <input type="text" class="form-control" id="modelo" placeholder="Introduce color o modelo"
-                                name="modelo" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="categoria">Categoria</label>
-                            <select class="form-select form-select-lg mt-3" id="categoria" name="categoria""
+                            </div>
+                            <div class="mb-3">
+                                <label for="modelo" class="form-label">Color o Modelo:</label>
+                                <input type="text" class="form-control" id="modelo"
+                                    placeholder="Introduce color o modelo" name="modelo" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="categoria">Categoria</label>
+                                <select class="form-select form-select-lg mt-3" id="categoria" name="categoria""
                             >
                                 <option value="">
                                     Seleccione una Categoria
                                 </option>
-                                <option value=" pantalones">Pantalon</option>
-                                <option value="franelas">Franela</option>
-                                <option value="zapatos">Zapato</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 d-none" id="tallaContainer">
-                            <label for="talla">Talla</label>
-                            <select class="form-select form-select-lg mt-3" id="talla"></select>
-                        </div>
-                        <div class="mb-3 d-none" id="marcaContainer">
-                            <label for="marca">Marca:</label>
-                            <input type="text" class="form-control" id="marca"
-                                placeholder="Introduce marca del producto" name="marca" />
-                        </div>
-                        <div class="mb-3 d-none" id="cantidadContainer">
-                            <label for="cantidad">Cantidad:</label>
-                            <input type="number" class="form-control" id="cantidad" placeholder="Introduce la cantidad"
-                                name="cantidad" />
-                        </div>
-                        <div class="mb-3 d-none" id="precioContainer">
-                            <label for="precio">Precio:</label>
-                            <input type="number" class="form-control" id="precio"
-                                placeholder="Introduce el precio de la unidad" name="precio" />
+                                <option value="pantalones">Pantalon</option>
+                                    <option value="franelas">Franela</option>
+                                    <option value="zapatos">Zapato</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 d-none" id="tallaContainer">
+                                <label for="talla">Talla</label>
+                                <select class="form-select form-select-lg mt-3" id="talla"></select>
+                            </div>
+                            <div class="mb-3 d-none" id="marcaContainer">
+                                <label for="marca">Marca:</label>
+                                <input type="text" class="form-control" id="marca"
+                                    placeholder="Introduce marca del producto" name="marca" />
+                            </div>
+                            <div class="mb-3 d-none" id="cantidadContainer">
+                                <label for="cantidad">Cantidad:</label>
+                                <input type="number" class="form-control" id="cantidad"
+                                    placeholder="Introduce la cantidad" name="cantidad" />
+                            </div>
+                            <div class="mb-3 d-none" id="precioContainer">
+                                <label for="precio">Precio:</label>
+                                <input type="number" class="form-control" id="precio"
+                                    placeholder="Introduce el precio de la unidad" name="precio" />
+                            </div>
                         </div>
 
-
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-success" value="Agregar">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                            Salir
-                        </button>
-                    </div>
-                    </form>
-                </div>
-            </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">
+                                Agregar
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                Salir
+                            </button>
+                        </div>
+            </form>
+        </div>
+        </div>
         </div>
     </section>
 
     <section>
         <table class="table">
-            <thead>
+            <thead class="bg-dark text-light">
                 <tr>
-                    <th scope="col">
+                    <th scope="col" class="p-3">
                         Producto
                         <i class="fa-sharp fa-solid fa-circle-chevron-down"></i>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="p-3">
                         Categoria
                         <i class="fa-sharp fa-solid fa-circle-chevron-down"></i>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="p-3">
                         Color o Modelo
                         <i class="fa-sharp fa-solid fa-circle-chevron-down"></i>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="p-3">
                         Talla
                         <i class="fa-sharp fa-solid fa-circle-chevron-down"></i>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="p-3">
                         Marca
                         <i class="fa-sharp fa-solid fa-circle-chevron-down"></i>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="p-3">
                         Cantidad
                         <i class="fa-sharp fa-solid fa-circle-chevron-down"></i>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="p-3">
                         Precio
                         <i class="fa-sharp fa-solid fa-circle-chevron-down"></i>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="p-3">
                         Total
                         <i class="fa-sharp fa-solid fa-circle-chevron-down"></i>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="p-3">
                         Acciones
 
                     </th>
                 </tr>
             </thead>
-            <!-- <tbody>
-                  <tr>
+            <tbody id="tbody">
+                <!-- <tr>
                     <th scope="row">1</th>
                     <td>Mark</td>
                     <td>Otto</td>
@@ -175,12 +179,12 @@
                     <th scope="row">3</th>
                     <td colspan="2">Larry the Bird</td>
                     <td>@twitter</td>
-                  </tr>
-                </tbody> -->
+                  </tr> -->
+            </tbody>
         </table>
     </section>
 
-    <footer class="bg-body-tertiary text-dark text-center py-3 fixed-bottom">
+    <footer class="bg-dark text-light text-center py-3 fixed-bottom">
         <div class="container">
             <div class="row">
                 <div class="col">
