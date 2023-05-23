@@ -127,6 +127,7 @@ const insertarInventarioInicial = async () => {
 }
 
 // Funcion para obtener el inventario que hay en LocalStorage
+// Funcion para obtener el inventario que hay en LocalStorage
 const obtenerInventarioDeLS = () => {
    // Accedemos al item del localStorage
    const inventarioJSON = localStorage.getItem('Inventario')
@@ -134,12 +135,16 @@ const obtenerInventarioDeLS = () => {
    // Convertimos el texto JSON
    const inventario = JSON.parse(inventarioJSON)
 
-   // Recorremos el array de productos en inventarios para asignarles a cada uno su instancia
-   // Esto se debe a que al guardar el array de productos en LocalStorage se transforma en texto plano, elimnando asi sus metodos y por lo tanto su instancia
-   const inventarioConInstancias = inventario.map(producto => Producto.instanciarObjeto(producto));
+   if (inventario) {
+      // Recorremos el array de productos en inventarios para asignarles a cada uno su instancia
+      // Esto se debe a que al guardar el array de productos en LocalStorage se transforma en texto plano, elimnando asi sus metodos y por lo tanto su instancia
+      const inventarioConInstancias = inventario.map(producto => Producto.instanciarObjeto(producto));
+   
+      // Retornarmos el inventario con instancias
+      return inventarioConInstancias
+   }
 
-   // Retornarmos el inventario con instancias
-   return inventarioConInstancias
+   return []
 }
 
 // Funcion para eliminar un producto del inventario del localStorage
@@ -164,4 +169,28 @@ const borrarProductoDeLS = (producto, inventario) => {
    }
 }
 
-export { agregarProducto, editarProducto, lanzarAlerta, guardarInventarioEnLS, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS }
+const template=(productos)=>{
+   productos.obtenerTotal()
+   
+   return `
+   <tr>
+   <td>${productos.producto}</td>
+   <td>${productos.categoria}</td>
+   <td>${productos.modelo}</td>
+   <td>${productos.talla}</td>
+   <td>${productos.marca}</td>
+   <td>${productos.cantidad}</td>
+   <td>${productos.precio}</td>
+   <td>${productos.total}</td>
+   <td></td>
+ </tr>`
+}
+
+const render= ()=>{
+   const productos = obtenerInventarioDeLS()
+   const tbody = document.getElementById('tbody')
+   tbody.innerHTML = productos.map(producto => template(producto)).join('')
+
+}
+
+export { agregarProducto, editarProducto, lanzarAlerta, guardarInventarioEnLS, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS,render }
