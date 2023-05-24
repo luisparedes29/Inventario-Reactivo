@@ -1,4 +1,4 @@
-import { agregarProducto, editarProducto, lanzarAlerta, render, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, guardarInventarioEnLS } from "./funciones.js";
+import { agregarProducto, editarProducto, lanzarAlerta, render, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, guardarInventarioEnLS, backup } from "./funciones.js";
 
 // Iniciamos el inventario
 // insertarInventarioInicial()
@@ -14,6 +14,7 @@ d.addEventListener("DOMContentLoaded", ()=>{
 
 
 // Obtenemos el Inventario
+const inventario = obtenerInventarioDeLS()
 
 
 const categoria = document.getElementById('categoria')
@@ -143,6 +144,17 @@ formulario.addEventListener('submit', (e) => {
   }
 })
 
+const btnBackup = d.getElementById('btn-backup')
+
+btnBackup.addEventListener('click', () => {
+  const file = JSON.stringify(inventario);
+  const filename = "storage.json";
+  console.log(file)
+  const link = backup(filename, file);
+  d.body.appendChild(link);
+  link.click();
+  d.body.removeChild(link);
+})
 
 // function eliminar(producto) {
 //   borrarProductoDeLS(producto,inventario)

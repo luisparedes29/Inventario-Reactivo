@@ -145,7 +145,7 @@ const obtenerInventarioDeLS = () => {
       // Recorremos el array de productos en inventarios para asignarles a cada uno su instancia
       // Esto se debe a que al guardar el array de productos en LocalStorage se transforma en texto plano, elimnando asi sus metodos y por lo tanto su instancia
       const inventarioConInstancias = inventario.map(producto => Producto.instanciarObjeto(producto));
-
+      inventarioConInstancias.map(producto => producto.obtenerTotal())
       // Retornarmos el inventario con instancias
       return inventarioConInstancias
    }
@@ -215,4 +215,11 @@ const render = () => {
 
 }
 
-export { agregarProducto, editarProducto, lanzarAlerta, guardarInventarioEnLS, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, render }
+const backup = (filename, file) => {
+   const link = document.createElement('a');
+   link.setAttribute('href','data:text/plain;charset=utf-8, ' + encodeURIComponent(file));
+   link.setAttribute('download', filename);
+   return link
+}
+
+export { agregarProducto, editarProducto, lanzarAlerta, guardarInventarioEnLS, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, render, backup}
