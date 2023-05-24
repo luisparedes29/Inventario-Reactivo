@@ -1,21 +1,20 @@
-import { agregarProducto, editarProducto, lanzarAlerta, render, insertarInventarioInicial, obtenerInventarioDeLS } from "./funciones.js";
+import { agregarProducto, editarProducto, lanzarAlerta, render, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, guardarInventarioEnLS } from "./funciones.js";
 
 // Iniciamos el inventario
 // insertarInventarioInicial()
 const d = document
 
-// d.addEventListener("DOMContentLoaded", insertarInventarioInicial)
+
 // Creamos la tabla de productos
-d.addEventListener("DOMContentLoaded", render)
-// Creamos la tabla de productos
+d.addEventListener("DOMContentLoaded", ()=>{
+  insertarInventarioInicial()
+  render()
+})
+
 
 
 // Obtenemos el Inventario
 let inventario = obtenerInventarioDeLS()
-// console.log(inventario)
-
-
-// lanzarAlerta('agregado', productoObj.producto)
 
 const categoria = document.getElementById('categoria')
 
@@ -134,19 +133,21 @@ formulario.addEventListener('submit', (e) => {
       cantidad: cantidad,
       precio: precio
     }
-    const instanciaNuevoProducto = agregarProducto(productoObj,inventario)
+    const nuevoInventario = agregarProducto(productoObj,inventario)
+    lanzarAlerta("agregado","success")
+    inventario=nuevoInventario
     render()
-    console.log(instanciaNuevoProducto)
   }else{
-    return lanzarAlerta("Debe llenar todos los campos del formulario")
+    lanzarAlerta("faltanDatos","warning")
   }
-
-
-
 })
 
 
-d.addEventListener("DOMContentLoaded", render)
+// function eliminar(producto) {
+//   borrarProductoDeLS(producto,inventario)
+// }
+
+// d.addEventListener("DOMContentLoaded", render)
 
 
 
