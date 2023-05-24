@@ -12,7 +12,8 @@ const mensajes = {
    sinExistencia: 'Sin Existencias',
    restore: 'Restore del inventario completado',
    backup: 'Backup del inventario en descarga',
-   faltanDatos: 'Rellene todos los campos del formulario'
+   faltanDatos: 'Rellene todos los campos del formulario',
+   errorRestore: 'No has seleccionado ningun archivo .json'
 }
 
 // Funcion para generar un ID unico utilizando la fecha actual en milisegundos con un numero aleatorio
@@ -86,7 +87,7 @@ const lanzarAlerta = (opcionMsg,icon, value = null) => {
    const alerta = new Alerta(mensajes[opcionMsg],icon, value)
 
    // Utilizamos el metodo para obtener el mensaje de la alerta
-   console.log(alerta.crearAlerta())
+   alerta.crearAlerta()
 }
 
 // Funcion para guardar el inventario en LocalStorage
@@ -226,7 +227,7 @@ const backup = (filename, file) => {
 // Funcion para realizar el restore del inventario
 const restore = (inputFile) => {
    const file = inputFile.files[0];
-   if(!file) return console.log('No has seleccionado ningun archivo .json');
+   if(!file) return lanzarAlerta('errorRestore', 'error') 
    
    const reader = new FileReader();
 

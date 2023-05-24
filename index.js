@@ -149,7 +149,6 @@ const btnBackup = d.getElementById('btn-backup')
 btnBackup.addEventListener('click', () => {
   const file = JSON.stringify(inventario);
   const filename = "storage.json";
-  console.log(file)
   const link = backup(filename, file);
   d.body.appendChild(link);
   link.click();

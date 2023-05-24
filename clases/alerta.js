@@ -11,14 +11,14 @@ class Alerta{
       if(this.valor !== null){
          return `${this.mensaje} ${this.valor}`
       }
-      console.log(this.icon)
+
       Swal.fire({
-         position: "top-center",
+         position: "center",
          icon: `${this.icon}`,
          title: this.mensaje,
          showConfirmButton: false,
          timer: 2000,
-       });
+      });
    }
 
 }
