@@ -188,7 +188,7 @@ const template = (productos) => {
    <td >${productos.cantidad}</td>
    <td>${productos.precio}</td>
    <td>${productos.total}</td>
-   <td><button type="button" class="btn btn-outline-warning btn-sm boton-editar">Editar</button> <button id="${productos.id}"  type="button" class="botones btn btn-outline-danger btn-sm">Eliminar</button> </td>
+   <td><button type="button" class="btn btn-outline-warning btn-sm border-0 fs-5  boton-editar"><i class="fa-solid fa-pencil"></i></button> <button id="${productos.id}"  type="button" class="botones btn btn-outline-danger btn-sm border-0 fs-5"><i class="fa-solid fa-trash"></i></button> </td>
  </tr>`
 }
 
