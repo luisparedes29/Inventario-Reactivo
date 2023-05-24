@@ -134,11 +134,12 @@ formulario.addEventListener('submit', (e) => {
       precio: precio
     }
     const nuevoInventario = agregarProducto(productoObj,inventario)
+    lanzarAlerta("agregado","success")
     inventario=nuevoInventario
     render()
     console.log(instanciaNuevoProducto)
   }else{
-    return lanzarAlerta("Debe llenar todos los campos del formulario")
+    lanzarAlerta("faltanDatos","warning")
   }
 })
 

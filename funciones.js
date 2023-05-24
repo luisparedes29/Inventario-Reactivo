@@ -12,6 +12,7 @@ const mensajes = {
    sinExistencia: 'Sin Existencias',
    restore: 'Restore del inventario completado',
    backup: 'Backup del inventario en descarga',
+   faltanDatos: 'Rellene todos los campos del formulario'
 }
 
 // Funcion para generar un ID unico utilizando la fecha actual en milisegundos con un numero aleatorio
@@ -80,9 +81,9 @@ const editarProducto = (objProducto, instancia, inventario) => {
 // Donde:
 // opcionMsg representa el tipo de mensaje que quiere enviar
 // value representa si hay algun valor adicional que desea enviar, Por ejemplo: el nombre del producto
-const lanzarAlerta = (opcionMsg, value = null) => {
+const lanzarAlerta = (opcionMsg,icon, value = null) => {
    // Instanciamos una Alerta
-   const alerta = new Alerta(mensajes[opcionMsg], value)
+   const alerta = new Alerta(mensajes[opcionMsg],icon, value)
 
    // Utilizamos el metodo para obtener el mensaje de la alerta
    console.log(alerta.crearAlerta())
@@ -207,6 +208,7 @@ const render = () => {
          console.log(boton.id)
          borrarProductoDeLS(boton.id, productos)
          render()
+         lanzarAlerta("eliminado","success")
 
       });
    });

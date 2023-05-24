@@ -1,7 +1,8 @@
 // Clase para instanciar una alerta
 class Alerta{
-   constructor(mensaje, valor = null){
+   constructor(mensaje,icon, valor = null){
       this.mensaje = mensaje;
+      this.icon=icon;
       this.valor = valor;
    }
 
@@ -10,7 +11,14 @@ class Alerta{
       if(this.valor !== null){
          return `${this.mensaje} ${this.valor}`
       }
-      return `${this.mensaje}`
+      console.log(this.icon)
+      Swal.fire({
+         position: "top-center",
+         icon: `${this.icon}`,
+         title: this.mensaje,
+         showConfirmButton: false,
+         timer: 2000,
+       });
    }
 
 }
