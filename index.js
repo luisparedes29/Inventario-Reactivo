@@ -14,7 +14,7 @@ d.addEventListener("DOMContentLoaded", ()=>{
 
 
 // Obtenemos el Inventario
-let inventario = obtenerInventarioDeLS()
+
 
 const categoria = document.getElementById('categoria')
 
@@ -133,6 +133,7 @@ formulario.addEventListener('submit', (e) => {
       cantidad: cantidad,
       precio: precio
     }
+    let inventario = obtenerInventarioDeLS()
     const nuevoInventario = agregarProducto(productoObj,inventario)
     lanzarAlerta("agregado","success")
     inventario=nuevoInventario
