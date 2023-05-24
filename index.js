@@ -133,7 +133,8 @@ formulario.addEventListener('submit', (e) => {
       cantidad: cantidad,
       precio: precio
     }
-    const instanciaNuevoProducto = agregarProducto(productoObj,inventario)
+    const nuevoInventario = agregarProducto(productoObj,inventario)
+    inventario=nuevoInventario
     render()
     console.log(instanciaNuevoProducto)
   }else{
