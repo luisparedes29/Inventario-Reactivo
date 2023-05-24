@@ -191,7 +191,7 @@ const template = (productos) => {
    <td><button type="button" class="btn btn-outline-warning btn-sm boton-editar">Editar</button> <button id="${productos.id}"  type="button" class="botones btn btn-outline-danger btn-sm">Eliminar</button> </td>
  </tr>`
 }
-// onclick="eliminar('${productos.id}')"
+
 
 const render = () => {
    const productos = obtenerInventarioDeLS()
@@ -205,8 +205,8 @@ const render = () => {
    botones.forEach(boton => {
       //Agregar listener
       boton.addEventListener("click", () => {
-         console.log(boton.id)
-         borrarProductoDeLS(boton.id, productos)
+         let inventarioActualizado = obtenerInventarioDeLS()
+         borrarProductoDeLS(boton.id, inventarioActualizado)
          render()
          lanzarAlerta("eliminado","success")
 

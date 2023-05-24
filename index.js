@@ -137,7 +137,6 @@ formulario.addEventListener('submit', (e) => {
     lanzarAlerta("agregado","success")
     inventario=nuevoInventario
     render()
-    console.log(instanciaNuevoProducto)
   }else{
     lanzarAlerta("faltanDatos","warning")
   }
