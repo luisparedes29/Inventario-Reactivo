@@ -100,10 +100,10 @@ const guardarInventarioEnLS = (inventario) => {
 
 // Funcion para obtener el Inventario Inicial
 const insertarInventarioInicial = async () => {
-   let inventario = obtenerInventarioDeLS()
-   console.log(inventario)
+   let inventario = localStorage.getItem('Inventario')
 
-   if (inventario.length == 0) {
+   if (inventario === null) {
+      inventario = []
       // Peticion para obtener el archivo JSON
       const productosEnInventario = await fetch('./storage/storage.json')
          .then(value => value.json())
