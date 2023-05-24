@@ -30,7 +30,7 @@ const agregarProducto = (objProducto, inventario) => {
    const { producto, categoria, modelo, talla, marca, cantidad, precio } = objProducto
    // Genera el ID del producto
    const id = generarID()
-   
+
    // Instanciamos un producto
    const product = new Producto(id, producto, categoria, modelo, talla, marca, cantidad, precio)
 
@@ -61,7 +61,7 @@ const editarProducto = (objProducto, instancia, inventario) => {
    if (index !== -1) {
       // Utilizamos el metodo para Editar las propiedades de la instancia que contenga las propiedades del objeto que viene del formulario
       instancia.editarProducto(objProducto)
-      
+
       // Utilizamos el metodo para obtener el precio total del producto en inventario
       instancia.obtenerTotal()
 
@@ -83,7 +83,7 @@ const editarProducto = (objProducto, instancia, inventario) => {
 const lanzarAlerta = (opcionMsg, value = null) => {
    // Instanciamos una Alerta
    const alerta = new Alerta(mensajes[opcionMsg], value)
-   
+
    // Utilizamos el metodo para obtener el mensaje de la alerta
    console.log(alerta.crearAlerta())
 }
@@ -99,31 +99,36 @@ const guardarInventarioEnLS = (inventario) => {
 
 // Funcion para obtener el Inventario Inicial
 const insertarInventarioInicial = async () => {
-   const inventario = []
+   let inventario = obtenerInventarioDeLS()
+   console.log(inventario)
 
-   // Peticion para obtener el archivo JSON
-   const productosEnInventario = await fetch('./storage/storage.json')
-      .then(value => value.json())
-      .then(value => value.inventario)
-   
-   // Se recorre el array de productos en inventario
-   productosEnInventario.forEach(objProducto => {
-      // Destructuracion del objeto producto
-      const { producto, categoria, modelo, talla, marca, cantidad, precio } = objProducto
-      const id = generarID()
-      
-      // Instanciamos el producto
-      const product = new Producto(id, producto, categoria, modelo, talla, marca, cantidad, precio)
-      
-      // Utilizamos el metodo para obtener el precio total del producto en inventario
-      product.obtenerTotal()
+   if (inventario.length == 0) {
+      // Peticion para obtener el archivo JSON
+      const productosEnInventario = await fetch('./storage/storage.json')
+         .then(value => value.json())
+         .then(value => value.inventario)
 
-      // Agregamos la instancia del producto en el arreglo de Inventario
-      inventario.push(product)
+      // Se recorre el array de productos en inventario
+      productosEnInventario.forEach(objProducto => {
+         // Destructuracion del objeto producto
+         const { producto, categoria, modelo, talla, marca, cantidad, precio } = objProducto
+         const id = generarID()
 
-   });
-   // Se guarda el inventario en LocalStorage
-   guardarInventarioEnLS(inventario)
+         // Instanciamos el producto
+         const product = new Producto(id, producto, categoria, modelo, talla, marca, cantidad, precio)
+
+         // Utilizamos el metodo para obtener el precio total del producto en inventario
+         product.obtenerTotal()
+
+         // Agregamos la instancia del producto en el arreglo de Inventario
+         inventario.push(product)
+
+      });
+      // Se guarda el inventario en LocalStorage
+      guardarInventarioEnLS(inventario)
+   }
+
+
 }
 
 // Funcion para obtener el inventario que hay en LocalStorage
@@ -139,7 +144,7 @@ const obtenerInventarioDeLS = () => {
       // Recorremos el array de productos en inventarios para asignarles a cada uno su instancia
       // Esto se debe a que al guardar el array de productos en LocalStorage se transforma en texto plano, elimnando asi sus metodos y por lo tanto su instancia
       const inventarioConInstancias = inventario.map(producto => Producto.instanciarObjeto(producto));
-   
+
       // Retornarmos el inventario con instancias
       return inventarioConInstancias
    }
@@ -154,7 +159,7 @@ const obtenerInventarioDeLS = () => {
 const borrarProductoDeLS = (producto, inventario) => {
    // Obtenemos el indice donde se encuentra el producto a eliminar
    // Para obtener el indice, debe cumplirse la condicion que los ID de los productos deben ser iguales
-   const index = inventario.findIndex(product => product.id === producto.id);
+   const index = inventario.findIndex(product => product.id === producto);
 
    // Si se encuentra un indice procede a eliminarlo del inventario
    if (index !== -1) {
@@ -169,9 +174,9 @@ const borrarProductoDeLS = (producto, inventario) => {
    }
 }
 
-const template=(productos)=>{
+const template = (productos) => {
    productos.obtenerTotal()
-   
+
    return `
    <tr class="articulos filtro-busqueda">
    <td class="nombre-producto">${productos.producto}</td>
@@ -182,15 +187,30 @@ const template=(productos)=>{
    <td >${productos.cantidad}</td>
    <td>${productos.precio}</td>
    <td>${productos.total}</td>
-   <td></td>
+   <td><button type="button" class="btn btn-outline-warning btn-sm boton-editar">Editar</button> <button id="${productos.id}"  type="button" class="botones btn btn-outline-danger btn-sm">Eliminar</button> </td>
  </tr>`
 }
+// onclick="eliminar('${productos.id}')"
 
-const render= ()=>{
+const render = () => {
    const productos = obtenerInventarioDeLS()
    const tbody = document.getElementById('tbody')
    tbody.innerHTML = productos.map(producto => template(producto)).join('')
 
+
+
+   const botones = document.querySelectorAll('.botones');
+   // botones es un arreglo así que lo recorremos
+   botones.forEach(boton => {
+      //Agregar listener
+      boton.addEventListener("click", () => {
+         console.log(boton.id)
+         borrarProductoDeLS(boton.id, productos)
+         render()
+
+      });
+   });
+
 }
 
-export { agregarProducto, editarProducto, lanzarAlerta, guardarInventarioEnLS, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS,render }
+export { agregarProducto, editarProducto, lanzarAlerta, guardarInventarioEnLS, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, render }
