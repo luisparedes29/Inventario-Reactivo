@@ -1,4 +1,4 @@
-import { agregarProducto, editarProducto, lanzarAlerta, render, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, guardarInventarioEnLS, backup } from "./funciones.js";
+import { agregarProducto, editarProducto, lanzarAlerta, render, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, guardarInventarioEnLS, backup, restore } from "./funciones.js";
 
 // Iniciamos el inventario
 // insertarInventarioInicial()
@@ -154,6 +154,13 @@ btnBackup.addEventListener('click', () => {
   d.body.appendChild(link);
   link.click();
   d.body.removeChild(link);
+})
+
+const btnRestore = d.getElementById('btn-restore')
+const inputFile = d.getElementById('importar')
+
+btnRestore.addEventListener('click', () => {
+  restore(inputFile)
 })
 
 // function eliminar(producto) {

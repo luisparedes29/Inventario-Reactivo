@@ -215,6 +215,7 @@ const render = () => {
 
 }
 
+// Funcion para realizar el backup del inventario
 const backup = (filename, file) => {
    const link = document.createElement('a');
    link.setAttribute('href','data:text/plain;charset=utf-8, ' + encodeURIComponent(file));
@@ -222,4 +223,20 @@ const backup = (filename, file) => {
    return link
 }
 
-export { agregarProducto, editarProducto, lanzarAlerta, guardarInventarioEnLS, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, render, backup}
+// Funcion para realizar el restore del inventario
+const restore = (inputFile) => {
+   const file = inputFile.files[0];
+   if(!file) return console.log('No has seleccionado ningun archivo .json');
+   
+   const reader = new FileReader();
+
+   reader.onload = function() {
+      const inventarioRestaurado = JSON.parse(reader.result);
+      localStorage.setItem('Inventario', JSON.stringify(inventarioRestaurado))
+      render()
+   }
+
+   reader.readAsText(file);
+}
+
+export { agregarProducto, editarProducto, lanzarAlerta, guardarInventarioEnLS, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, render, backup, restore}
