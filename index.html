@@ -94,12 +94,12 @@
                             <div class="mb-3 d-none" id="cantidadContainer">
                                 <label for="cantidad">Cantidad:</label>
                                 <input type="number" class="form-control" id="cantidad"
-                                    placeholder="Introduce la cantidad" name="cantidad" />
+                                    placeholder="Introduce la cantidad" min="1" name="cantidad" />
                             </div>
                             <div class="mb-3 d-none" id="precioContainer">
                                 <label for="precio">Precio:</label>
                                 <input type="number" class="form-control" id="precio"
-                                    placeholder="Introduce el precio de la unidad" name="precio" />
+                                    placeholder="Introduce el precio de la unidad" min="1" name="precio" />
                             </div>
                         </div>
 
@@ -160,9 +160,9 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white" id="tbody">
-                    
                 </tbody>
             </table>
+            <div id="table"></div>
     </section>
 
     <section class="m-3">

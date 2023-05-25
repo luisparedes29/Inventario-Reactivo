@@ -17,7 +17,7 @@ d.addEventListener("DOMContentLoaded", ()=>{
 const inventario = obtenerInventarioDeLS()
 
 
-const categoria = document.getElementById('categoria')
+let categoria = document.getElementById('categoria')
 
 categoria.addEventListener("change", showTallaInput)
 
@@ -116,29 +116,36 @@ const formulario = d.getElementById('registrarProductos')
 
 formulario.addEventListener('submit', (e) => {
   e.preventDefault()
-  const producto = d.getElementById('producto').value
-  const precio = d.getElementById('precio').value
-  const cantidad = d.getElementById('cantidad').value
-  const talla = d.getElementById('talla').value
-  const marca = d.getElementById('marca').value
-  const modelo= d.getElementById('modelo').value
+  let producto = d.getElementById('producto')
+  let precio = d.getElementById('precio')
+  let cantidad = d.getElementById('cantidad')
+  let talla = d.getElementById('talla')
+  let marca = d.getElementById('marca')
+  let modelo= d.getElementById('modelo')
   // let categoria = d.getElementById('categoria').value
 
-  if(producto&&precio&&cantidad&&talla&&marca&&modelo){
+  if(producto.value&&precio.value&&cantidad.value&&talla.value&&marca.value&&modelo.value){
     const productoObj = {
-      producto: producto,
+      producto: producto.value,
       categoria: categoria.value,
-      modelo: modelo,
-      talla: talla,
-      marca: marca,
-      cantidad: cantidad,
-      precio: precio
+      modelo: modelo.value,
+      talla: talla.value,
+      marca: marca.value,
+      cantidad: cantidad.value,
+      precio: precio.value
     }
     let inventario = obtenerInventarioDeLS()
     const nuevoInventario = agregarProducto(productoObj,inventario)
     lanzarAlerta("agregado","success")
     inventario=nuevoInventario
     render()
+    producto.value=""
+    precio.value=""
+    categoria.value=""
+    cantidad.value=""
+    talla.value=""
+    marca.value=""
+    modelo.value=""
   }else{
     lanzarAlerta("faltanDatos","warning")
   }

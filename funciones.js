@@ -201,18 +201,17 @@ const render = () => {
 
 
 
-   const botones = document.querySelectorAll('.botones');
-   // botones es un arreglo así que lo recorremos
-   botones.forEach(boton => {
-      //Agregar listener
-      boton.addEventListener("click", () => {
-         let inventarioActualizado = obtenerInventarioDeLS()
-         borrarProductoDeLS(boton.id, inventarioActualizado)
-         render()
-         lanzarAlerta("eliminado","success")
-
+      const botones = document.querySelectorAll('.botones');
+      // botones es un arreglo así que lo recorremos
+      botones.forEach(boton => {
+         //Agregar listener
+         boton.addEventListener("click", () => {
+            let inventarioActualizado = obtenerInventarioDeLS()
+            borrarProductoDeLS(boton.id, inventarioActualizado)
+            render()
+            lanzarAlerta("eliminado","success")
+         });
       });
-   });
 
 }
 
