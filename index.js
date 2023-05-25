@@ -1,4 +1,4 @@
-import { agregarProducto, editarProducto, lanzarAlerta, render, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, guardarInventarioEnLS, backup, restore } from "./funciones.js";
+import { agregarProducto, editarProducto, lanzarAlerta, render, insertarInventarioInicial, obtenerInventarioDeLS, backup, restore } from "./funciones.js";
 
 // Iniciamos el inventario
 // insertarInventarioInicial()
