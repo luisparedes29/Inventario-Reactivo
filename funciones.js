@@ -12,7 +12,8 @@ const mensajes = {
    sinExistencia: 'Sin Existencias',
    restore: 'Restore del inventario completado',
    backup: 'Backup del inventario en descarga',
-   faltanDatos: 'Rellene todos los campos del formulario'
+   faltanDatos: 'Rellene todos los campos del formulario',
+   errorRestore: 'No has seleccionado ningun archivo .json'
 }
 
 // Funcion para generar un ID unico utilizando la fecha actual en milisegundos con un numero aleatorio
@@ -86,7 +87,7 @@ const lanzarAlerta = (opcionMsg,icon, value = null) => {
    const alerta = new Alerta(mensajes[opcionMsg],icon, value)
 
    // Utilizamos el metodo para obtener el mensaje de la alerta
-   console.log(alerta.crearAlerta())
+   alerta.crearAlerta()
 }
 
 // Funcion para guardar el inventario en LocalStorage
@@ -100,10 +101,10 @@ const guardarInventarioEnLS = (inventario) => {
 
 // Funcion para obtener el Inventario Inicial
 const insertarInventarioInicial = async () => {
-   let inventario = obtenerInventarioDeLS()
-   console.log(inventario)
+   let inventario = localStorage.getItem('Inventario')
 
-   if (inventario.length == 0) {
+   if (inventario === null) {
+      inventario = []
       // Peticion para obtener el archivo JSON
       const productosEnInventario = await fetch('./storage/storage.json')
          .then(value => value.json())
@@ -145,7 +146,7 @@ const obtenerInventarioDeLS = () => {
       // Recorremos el array de productos en inventarios para asignarles a cada uno su instancia
       // Esto se debe a que al guardar el array de productos en LocalStorage se transforma en texto plano, elimnando asi sus metodos y por lo tanto su instancia
       const inventarioConInstancias = inventario.map(producto => Producto.instanciarObjeto(producto));
-
+      inventarioConInstancias.map(producto => producto.obtenerTotal())
       // Retornarmos el inventario con instancias
       return inventarioConInstancias
    }
@@ -188,7 +189,7 @@ const template = (productos) => {
    <td >${productos.cantidad}</td>
    <td>${productos.precio}</td>
    <td>${productos.total}</td>
-   <td><button type="button" class="btn btn-outline-warning btn-sm boton-editar">Editar</button> <button id="${productos.id}"  type="button" class="botones btn btn-outline-danger btn-sm">Eliminar</button> </td>
+   <td><button type="button" class="btn btn-outline-warning btn-sm border-0 fs-5  boton-editar"><i class="fa-solid fa-pencil"></i></button> <button id="${productos.id}"  type="button" class="botones btn btn-outline-danger btn-sm border-0 fs-5"><i class="fa-solid fa-trash"></i></button> </td>
  </tr>`
 }
 
@@ -215,4 +216,28 @@ const render = () => {
 
 }
 
-export { agregarProducto, editarProducto, lanzarAlerta, guardarInventarioEnLS, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, render }
+// Funcion para realizar el backup del inventario
+const backup = (filename, file) => {
+   const link = document.createElement('a');
+   link.setAttribute('href','data:text/plain;charset=utf-8, ' + encodeURIComponent(file));
+   link.setAttribute('download', filename);
+   return link
+}
+
+// Funcion para realizar el restore del inventario
+const restore = (inputFile) => {
+   const file = inputFile.files[0];
+   if(!file) return lanzarAlerta('errorRestore', 'error') 
+   
+   const reader = new FileReader();
+
+   reader.onload = function() {
+      const inventarioRestaurado = JSON.parse(reader.result);
+      localStorage.setItem('Inventario', JSON.stringify(inventarioRestaurado))
+      render()
+   }
+
+   reader.readAsText(file);
+}
+
+export { agregarProducto, editarProducto, lanzarAlerta, guardarInventarioEnLS, insertarInventarioInicial, obtenerInventarioDeLS, borrarProductoDeLS, render, backup, restore}
